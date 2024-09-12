@@ -5,9 +5,12 @@ import static dev.be.feign.common.consts.DemoConstant.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import dev.be.feign.common.dto.BaseRequestInfo;
 import dev.be.feign.common.dto.BaseResponseInfo;
 import dev.be.feign.feign.config.DemoFeignConfig;
 
@@ -22,4 +25,7 @@ public interface DemoFeignClient {
 		@RequestParam("name") String name,
 		@RequestParam("age") Long age);
 
+	@PostMapping("/post")
+	ResponseEntity<BaseResponseInfo> callPost(@RequestHeader(CUSTOM_HEADER_NAME) String customHeader,
+		@RequestBody BaseRequestInfo baseRequestInfo);
 }
